@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="SampleReport" 
+              pageWidth="595" 
+              pageHeight="842" 
+              columnWidth="555" 
+              leftMargin="20" 
+              rightMargin="20" 
+              topMargin="20" 
+              bottomMargin="20" 
+              uuid="a1234bc5-6789-1234-5678-abcd12345678">
+
+    <property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver"/>
+
+    <!-- Report Title -->
+    <title>
+        <band height="50">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="30"/>
+                <textElement>
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[external.api/report2]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <!-- Static Text Section -->
+    <detail>
+        <band height="30">
+            <staticText>
+                <reportElement x="0" y="0" width="200" height="20"/>
+                <textElement>
+                    <font size="12" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[This is a static text in the report 2.]]></text>
+            </staticText>
+        </band>
+    </detail>
+    
+    <!-- Footer Section -->
+    <pageFooter>
+        <band height="20">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement>
+                    <font size="10"/>
+                </textElement>
+                <text><![CDATA[Page Footer]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+</jasperReport>

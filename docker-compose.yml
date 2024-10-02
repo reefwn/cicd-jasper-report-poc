@@ -1,0 +1,45 @@
+services:
+  jasperreports:
+    image: bitnami/jasperreports:8.1.0
+    container_name: jasperreports
+    ports:
+      - "8080:8080"
+    environment:
+      - JASPERREPORTS_USERNAME=admin
+      - JASPERREPORTS_PASSWORD=password
+      - JASPERREPORTS_DATABASE_HOST=mysql
+      - JASPERREPORTS_DATABASE_PORT_NUMBER=3306
+      - JASPERREPORTS_DATABASE_USER=jasperadmin
+      - JASPERREPORTS_DATABASE_PASSWORD=jasperadmin
+      - JASPERREPORTS_DATABASE_NAME=jasperdb
+    depends_on:
+      - mysql
+    networks:
+      - jasper-network
+
+  mysql:
+    image: bitnami/mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=jasperadmin
+      - MYSQL_PASSWORD=jasperadmin
+      - MYSQL_DATABASE=jasperdb
+    volumes:
+      - ./mysql_data:/bitnami/mysql/data
+    networks:
+      - jasper-network
+
+  # Jasper CI/CD
+  jaspercicd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - jasperreports
+    networks:
+      - jasper-network
+
+networks:
+  jasper-network:
+    driver: bridge

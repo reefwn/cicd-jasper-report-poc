@@ -1,0 +1,18 @@
+image: alpine
+
+pipelines:
+  branches:
+    develop:
+      - step:
+        name: Deploy JasperReports
+        script:
+          - apk add --no-cache curl
+          - chmod +x ./scripts/deploy.sh
+          - ./scripts/reports.sh development
+    main:
+      - step:
+        name: Deploy JasperReports
+        script:
+          - apk add --no-cache curl
+          - chmod +x ./scripts/deploy.sh
+          - ./scripts/reports.sh production
